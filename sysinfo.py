@@ -3,31 +3,22 @@ import psutil
 import socket
 import time
 
-def getInfo():
-    comp_name = platform.node()
-    system_name =platform.platform()
-    processor = platform.processor()
+class SysInfo:
+    def get_info(self):
+        system_name = platform.platform()
+        processor = platform.processor()
+        hostname = socket.gethostname()
+        ip_addr = socket.gethostbyname(hostname)
+        print(f"Computer name: {hostname}\nSystem name: {system_name}\nProcessor: {processor}\nIP-Address: {ip_addr}")
 
-def getIP():
-    hostname = socket.gethostname()
-    ipAddr = socket.gethostbyname(hostname)
-    print(f"\nHostname : {hostname}")
-    print(f"IP-address : {ipAddr} \n")
+    def get_usage(self, cpu_usage, mem_usage, bars=50):
+        cpu_percent = cpu_usage / 100
+        cpu_bar = "|" * int(cpu_percent * bars) + "-" * (bars - int(cpu_percent * bars))
 
-def getUsage(cpu_usage, mem_usage, bars = 50):
-    cpu_precent = (cpu_usage / 100)
-    cpu_bar = '' * int(cpu_precent * bars)+ '-' * (bars - int(cpu_precent*bars)) 
+        mem_percent = mem_usage / 100
+        mem_bar = "|" * int(mem_percent * bars) + "-" * (bars - int(mem_percent * bars))
 
-    mem_precent = (mem_usage / 100)
-    mem_bar = '' * int(mem_precent*bars)+'-'*(bars-int(mem_precent*bars))
-
-    print(f"\r CPU Usage: |{cpu_bar}| {cpu_usage:.2f}%", end="")
-    print (f"MEM usage: |{mem_bar}| {mem_usage: .2f}%  ", end="\r")
-
-
-while True:
-    getUsage(psutil.cpu_percent(), psutil.virtual_memory().percent,30)
-    time.sleep(0.5)
-
+        print(f"\rCPU Usage: |{cpu_bar}| {cpu_usage:.2f}%  MEM usage: |{mem_bar}| {mem_usage:.2f}%", end="")
+    
 
 

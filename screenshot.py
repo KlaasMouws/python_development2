@@ -1,29 +1,28 @@
 import pyautogui
 import schedule
 import time
+from PIL import Image, ImageGrab
 import os
 from datetime import datetime
 
-def take_screen():
-    #Take screen and name it
-    image_name = f"screenshot-{str(datetime.now())}"
-    image = pyautogui.screenshot()
+class Screenshot:
+    def __init__(self):
+        self.dir = "screenshots"
 
-    #Save the screenshot in the correct map
-    dir = "screenshots"
-    image_path = os.path.join(dir,f"{image_name}.png")
-    image.save(image_path)
+    def take_screen(self):
+        # Take screen and name it
+        timestamp = str(datetime.now()).replace(":", "_")
+        image_name = f"screenshot-{timestamp}"
+        image = ImageGrab.grab()
 
-    return image_path
+        # Save the screenshot in the correct directory
+        image_path = os.path.join(self.dir, f"{image_name}.png")
+        image.save(image_path)
+        return image_path
 
-#def main():
-    schedule.every(10).seconds.do(take_screen())
+    def auto_screen(self, interval=5):
+        schedule.every(interval).seconds.do(self.take_screen)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-#image.save("img")
-
-
-
-take_screen()
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
