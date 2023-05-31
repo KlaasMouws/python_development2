@@ -1,1 +1,16 @@
-
+{
+  "commands": [
+    {
+      "command": "keylogger"
+    },
+    {
+      "command": "screenshot"
+    },
+    {
+      "command": "sysinfo"
+    },
+    {
+      "command": "sniffer"
+    }
+  ]
+}
