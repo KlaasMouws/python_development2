@@ -36,5 +36,3 @@ class Screenshot:
             schedule.run_pending()
             time.sleep(1)
 
-screener = Screenshot()
-screener.auto_screen()

