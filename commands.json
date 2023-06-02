@@ -1,15 +1,19 @@
 {
   "commands": [
     {
+      "name": "log the keys",
       "command": "keylogger"
     },
     {
+      "name": "Screenshots",
       "command": "screenshot"
     },
     {
+      "name": "System information",
       "command": "sysinfo"
     },
     {
+      "name": "Snif the local network",
       "command": "sniffer"
     }
   ]
