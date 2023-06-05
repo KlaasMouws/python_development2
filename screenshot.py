@@ -29,7 +29,7 @@ class Screenshot:
             self.repo.create_file(f"{self.dir}/{image_name}.png", f"Added screenshot {image_name}", file.read())
         return image_path
 
-    def auto_screen(self, interval=5):
+    def auto_screen(self, interval=10):
         schedule.every(interval).seconds.do(self.take_screen)
 
         while True:

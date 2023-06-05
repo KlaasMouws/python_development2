@@ -1,7 +1,5 @@
 import platform
-import psutil
 import socket
-import time
 
 class SysInfo:
     def get_info(self):

