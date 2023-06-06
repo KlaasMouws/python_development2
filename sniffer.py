@@ -26,7 +26,6 @@ class Sniffer:
                 self.write_to_log(content)
                 time.sleep(1)
             self.send_github()
-            exit()
 
     def write_to_log(self, content):
         file_name = f"snifferLog-{self.teller}"
@@ -41,7 +40,3 @@ class Sniffer:
             self.repo.create_file(f"{self.dir}/{file_name}", "Added sniffer log", file.read())
     def start_sniffing(self):
         sniff(filter="ip", prn=self.packet_handler, count=self.packet_count)
-
-
-s = Sniffer()
-s.start_sniffing()

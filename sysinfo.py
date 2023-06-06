@@ -38,7 +38,6 @@ class SysInfo:
             self.write_to_log(content)
             time.sleep(1)
         self.send_github()
-        exit()
     
     def write_to_log(self, content):
         file_name = f"memoryLog-{self.teller}"
@@ -51,8 +50,3 @@ class SysInfo:
         log_path = os.path.join(self.dir, file_name)
         with open(log_path, "rb") as file:
             self.repo.create_file(f"{self.dir}/{file_name}", "Added memory log", file.read())
-
-
-
-s = SysInfo()
-s.get_usage(psutil.cpu_percent(), psutil.virtual_memory().percent,30)

