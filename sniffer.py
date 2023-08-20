@@ -42,4 +42,4 @@ class Sniffer:
     def start_sniffing(self):
         print("Het programma begint met sniffen.")
         sniff(filter="ip", prn=self.packet_handler, count=self.packet_count)
-
+print('test')
